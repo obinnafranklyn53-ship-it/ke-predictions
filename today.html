@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Today's Predictions | K.E Predictions</title>
+  <link rel="stylesheet" href="K-E_statistics.css">
+  <style>
+    .page-title { text-align: center; padding: 30px 10px 10px; }
+    .page-title p { margin: 5px 0 0; }
+    .tip-section { width: 90%; margin: 40px auto; }
+    .tip-section h2 { border-bottom: 2px dashed white; padding-bottom: 10px; }
+    .tip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .tip {
+      border: 2px dashed white;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+    }
+    .tip h3 { margin: 0 0 5px; }
+    .tip .league { color: #46ecfb; font-weight: bold; margin: 0 0 15px; }
+    .tip .pick { font-size: 18px; margin: 10px 0; }
+    .tip .meta { display: flex; justify-content: space-around; margin-top: 15px; }
+    .tip .odds { font-size: 22px; font-weight: bold; color: #46ecfb; }
+    .empty { text-align: center; padding: 30px; }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <nav class="nav">
+    <img class="logo" src="Images/KEP.png" alt="KEP logo">
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact Us</a></li>
+      <li><a href="#">Login</a></li>
+      <li><a href="#">Sign Up</a></li>
+    </ul>
+    <button id="menuButton" class="menu-btn">☰</button>
+
+    <div id="sidebar" class="sidebar">
+      <button id="closeButton" class="close-button">×</button>
+      <a href="index.html">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Login</a>
+      <a href="#">Sign Up</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="page-title">
+    <h1>Today's Predictions</h1>
+    <p id="dateText">Loading...</p>
+  </section>
+
+  <div id="content"></div>
+</main>
+
+<footer class="footer">
+  <img src="Images/KEP.png" alt="KEP logo">
+  <p class="inn">Statistical Predictions</p>
+  <p>©️ 2026 KingTech</p>
+</footer>
+
+<script>
+  const categories = [
+    { key: "bonus", title: "BONUS TIPS" },
+    { key: "odds2", title: "DAILY 2.0 ODDS" },
+    { key: "goals", title: "GOALS OVER/UNDER PREDICTIONS" }
+  ];
+
+  function el(tag, className, text) {
+    const e = document.createElement(tag);
+    if (className) e.className = className;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  function buildTip(t) {
+    const card = el("article", "tip");
+    card.appendChild(el("h3", "", t.match));
+    card.appendChild(el("p", "league", t.league));
+    card.appendChild(el("p", "pick", t.prediction));
+    const meta = el("div", "meta");
+    meta.appendChild(el("span", "odds", "Odds: " + Number(t.odds).toFixed(2)));
+    meta.appendChild(el("span", "", "Kick-off: " + t.kickoff));
+    card.appendChild(meta);
+    return card;
+  }
+
+  function showDate(dateStr) {
+    const d = new Date(dateStr + "T00:00:00");
+    document.getElementById("dateText").textContent = isNaN(d)
+      ? dateStr
+      : d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  }
+
+  fetch("predictions.json?v=" + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      showDate(data.date);
+      const content = document.getElementById("content");
+      let any = false;
+
+      categories.forEach(cat => {
+        const tips = data.tips.filter(t => t.category === cat.key);
+        if (!tips.length) return;
+        any = true;
+        const section = el("section", "tip-section");
+        section.appendChild(el("h2", "", cat.title));
+        const grid = el("div", "tip-grid");
+        tips.forEach(t => grid.appendChild(buildTip(t)));
+        section.appendChild(grid);
+        content.appendChild(section);
+      });
+
+      if (!any) content.appendChild(el("p", "empty", "No predictions posted yet today. Check back soon."));
+    })
+    .catch(() => {
+      document.getElementById("dateText").textContent = "";
+      document.getElementById("content").appendChild(
+        el("p", "empty", "Couldn't load today's predictions. Please refresh the page.")
+      );
+    });
+
+  // Sidebar menu (same as landing page)
+  document.getElementById("menuButton").onclick = () => document.getElementById("sidebar").classList.add("active");
+  document.getElementById("closeButton").onclick = () => document.getElementById("sidebar").classList.remove("active");
+</script>
+</body>
+</html>
