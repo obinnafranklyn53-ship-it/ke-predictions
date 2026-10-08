@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Landing Page</title>
+      <link rel="stylesheet" href="K-E_statistics.css">
+  </head>
+  <body>
+
+  <header class="header">
+    <nav class="nav">
+            <img class="logo" src="Images/KEP.png" alt="KEP logo">
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+             <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Sign Up</a></li>
+           
+        </ul>
+
+        <button id="menuButton" class="menu-btn">☰</button>
+
+<!-- Mobile sidebar -->
+<div id="sidebar" class="sidebar">
+
+    <button id="closeButton" class="close-button">×</button>
+
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact Us</a>
+    <a href="#">Login</a>
+    <a href="#">Sign Up</a>
+
+</div>
+          </nav>
+  </header>
+  <main>
+   <section class="hero">
+     <h1>Welcome To K.E Predictions.</h1>
+     <p>We statistically analyse and predict football matches outcome. </p>
+     <button class="started">Get started</button>
+   </section>
+    
+    <section class="features">
+          <article class="card">
+    <h2>BONUS TIPS</h2>
+    <p>Check out total shots predictions.</p>
+    <button class="cardbtn" >Read More</button>
+</article>
+<article class="card">
+    <h2>DAILY 2.0 ODDS</h2>
+    <p>Check out today's 2 odds combo.</p>
+    <a href="today.html"><button class="cardbtn" >Explore tips</button></a>
+</article>
+<article class="card">
+    <h2>GOALS OVER/UNDER PREDICTIONS</h2>
+    <p>Check out today's total goals Predictions.</p>
+    <button class="cardbtn" >Read More</button>
+</article>
+    </section>
+  </main>
+        <footer class="footer">
+          <img src="Images/KEP.png" alt="KEP logo">
+          <p class="inn"> Statistical Predictions</p>
+          <h1>Company</h1>
+          <p>About</p>
+          <p>Features</p>
+          <p>Pricing</p>
+          <p>Contact</p>
+   <p>© 2026 KingTech</p>
+        </footer>
+<script>
+  const cards = document.querySelectorAll(".card");
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach((entry) => {
+
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+        }
+
+    });
+
+});
+
+cards.forEach((card) => {
+    observer.observe(card);
+});
+  
+      let menuButton = document.getElementById("menuButton");
+let closeButton = document.getElementById("closeButton");
+let sidebar = document.getElementById("sidebar");
+menuButton.onclick = function() {
+    sidebar.classList.add("active");
+};
+closeButton.onclick = function() {
+    sidebar.classList.remove("active");
+};
+    </script>
+    </body>
