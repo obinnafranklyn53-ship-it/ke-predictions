@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-08",
+  "tips": [
+    {
+      "category": "bonus",
+      "match": "Arsenal vs Chelsea",
+      "league": "Premier League",
+      "prediction": "Over 24.5 total shots",
+      "odds": 1.85,
+      "kickoff": "17:30"
+    },
+    {
+      "category": "bonus",
+      "match": "Barcelona vs Sevilla",
+      "league": "La Liga",
+      "prediction": "Over 9.5 total shots on target",
+      "odds": 1.90,
+      "kickoff": "20:00"
+    },
+    {
+      "category": "odds2",
+      "match": "Bayern Munich vs Mainz",
+      "league": "Bundesliga",
+      "prediction": "Bayern Munich to win",
+      "odds": 1.30,
+      "kickoff": "18:30"
+    },
+    {
+      "category": "odds2",
+      "match": "Inter vs Torino",
+      "league": "Serie A",
+      "prediction": "Inter to win",
+      "odds": 1.55,
+      "kickoff": "19:45"
+    },
+    {
+      "category": "goals",
+      "match": "Liverpool vs Brentford",
+      "league": "Premier League",
+      "prediction": "Over 2.5 goals",
+      "odds": 1.70,
+      "kickoff": "15:00"
+    },
+    {
+      "category": "goals",
+      "match": "PSG vs Lens",
+      "league": "Ligue 1",
+      "prediction": "Over 2.5 goals",
+      "odds": 1.65,
+      "kickoff": "21:00"
+    }
+  ]
+}
